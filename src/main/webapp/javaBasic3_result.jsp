@@ -9,10 +9,12 @@
 	String age1 = request.getParameter("age");
 	if("".equals(age1)){
 		age1 = "0";
+		
+
 	}
 	
+		int y = Integer.parseInt(age1);		
 
-		int y = Integer.parseInt(age1);
 
     
 	String blood = request.getParameter("bloodType");
