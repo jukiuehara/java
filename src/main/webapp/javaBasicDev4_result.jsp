@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-  pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
     /*
        下記コメントを参考に、必要な処理を記述してください
@@ -8,8 +8,8 @@
        入力値を受け取るように修正すれば、この警告は消えます
     */
     // セッションから現在の所持金を取得
-    int money = 50000; //現在は仮で値をセットしている。実際はセッションから取得する
-
+//現在は仮で値をセットしている。実際はセッションから取得する
+       int money = (int)session.getAttribute("money");
     // 表示用変数定義
     String msg = ""; // 購入メッセージ
     String result = ""; // 購入した商品
@@ -46,9 +46,13 @@
     		}
     		
     	}
-    	if(money>sumAmount){
+    	if(money>=sumAmount){
      	newMoney-=sumAmount;
      	   msg="以下の商品を購入しました";
+     	   
+
+     	  session.setAttribute("money", newMoney);
+     	   
     	}else{
     		msg="所持金が足りませんでした";
     	}
@@ -83,17 +87,17 @@
 <title>Java基礎_演習問題4(発展)</title>
 </head>
 <body>
-  <h1>Java基礎 - 演習問題4(発展)</h1>
+	<h1>Java基礎 - 演習問題4(発展)</h1>
 
-  <h2>購入結果</h2>
-  <h3><%=msg%></h3>
-  <p>
-    購入前の所持金：<%=money%><br> 購入後の所持金：<%=newMoney%></p>
-  <p>
-    【購入商品】<br>
-    <%=result%>
-  </p>
+	<h2>購入結果</h2>
+	<h3><%=msg%></h3>
+	<p>
+		購入前の所持金：<%=money%><br> 購入後の所持金：<%=newMoney%></p>
+	<p>
+		【購入商品】<br>
+		<%=result%>
+	</p>
 
-  <a href="javaBasicDev4_input.jsp">戻る</a>
+	<a href="javaBasicDev4_input.jsp">戻る</a>
 </body>
 </html>
