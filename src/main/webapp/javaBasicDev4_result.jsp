@@ -1,83 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-    /*
-       下記コメントを参考に、必要な処理を記述してください
-       現在は各変数に仮で値をセットしているので、
-       商品が選択されている場合の処理に警告(デッドコード)が出ています
-       入力値を受け取るように修正すれば、この警告は消えます
-    */
-    // セッションから現在の所持金を取得
+/*
+   下記コメントを参考に、必要な処理を記述してください
+   現在は各変数に仮で値をセットしているので、
+   商品が選択されている場合の処理に警告(デッドコード)が出ています
+   入力値を受け取るように修正すれば、この警告は消えます
+*/
+// セッションから現在の所持金を取得
 //現在は仮で値をセットしている。実際はセッションから取得する
-       int money = (int)session.getAttribute("money");
-    // 表示用変数定義
-    String msg = ""; // 購入メッセージ
-    String result = ""; // 購入した商品
-    int sumAmount = 0; // 購入した金額の合計
-    int newMoney = money; // 購入後の所持金
+int money = (int) session.getAttribute("money");
+// 表示用変数定義
+String msg = ""; // 購入メッセージ
+String result = ""; // 購入した商品
+int sumAmount = 0; // 購入した金額の合計
+int newMoney = money; // 購入後の所持金
 
-    // 入力値を取得
-    String[] product = request.getParameterValues("product"); 
-
-
+// 入力値を取得
+String[] product = request.getParameterValues("product");
 
 //現在は仮で値をセットしている。実際は入力値を受け取る
-	
 
-    // 商品が選択されているか判断
-    if (product == null || product.length == 0) {
-    	msg="商品が選ばれていません";
+// 商品が選択されているか判断
+if (product == null || product.length == 0) {
+	msg = "商品が選ばれていません";
 
-    } else {
-    	
-    	for(String n: product){
-    		if(n.equals("tv")){
-    			result+="テレビ<br>";
-    			sumAmount+=20000;
-    		}else if(n.equals("refrigerator")){
-    			result+="冷蔵庫<br>";
-    			sumAmount+=30000;
-    		}else if(n.equals("microWave")){
-    			result+="電子レンジ<br>";
-    			sumAmount+=10000;
-    		}else if(n.equals("washingMachine")){
-    			result+="洗濯機<br>";
-    			sumAmount+=50000;
-    		}
-    		
-    	}
-    	if(money>=sumAmount){
-     	newMoney-=sumAmount;
-     	   msg="以下の商品を購入しました";
-     	   
+} else {
 
-     	  session.setAttribute("money", newMoney);
-     	   
-    	}else{
-    		msg="所持金が足りませんでした";
-    	}
+	for (String n : product) {
+		if (n.equals("tv")) {
+	result += "テレビ<br>";
+	sumAmount += 20000;
+		} else if (n.equals("refrigerator")) {
+	result += "冷蔵庫<br>";
+	sumAmount += 30000;
+		} else if (n.equals("microWave")) {
+	result += "電子レンジ<br>";
+	sumAmount += 10000;
+		} else if (n.equals("washingMachine")) {
+	result += "洗濯機<br>";
+	sumAmount += 50000;
+		}
 
+	}
+	if (money >= sumAmount) {
+		newMoney -= sumAmount;
+		msg = "以下の商品を購入しました";
 
-        // 購入金額等の計算を行う
-        // 商品は複数選択されるので、
-        // 受け取った入力値(product)に複数選択した値が入っている
-        // 拡張for文を使用して、変数productから
-        // 選択したものを取り出し、
-        // 対応する商品の金額をsumAmountに加算
-        // また、選択した商品名をresultにくっつけて、文字列を作成
-        // (商品名の区切り(後ろ)には<br>をつける)
-        // (例:「テレビ」と「冷蔵庫」を選択した場合、sumAmountの値は「50000」
-        //      resultの値は「テレビ<br>冷蔵庫<br>」になる
+		session.setAttribute("money", newMoney);
 
-        // 現在の所持金と購入金額の合計を比較して、
-        // 所持金が足りているか判断
+	} else {
+		msg = "所持金が足りませんでした";
+	}
 
-        // 足りている場合は、購入後の所持金を計算し、
-        // 変数:newMoneyにセット
+	// 購入金額等の計算を行う
+	// 商品は複数選択されるので、
+	// 受け取った入力値(product)に複数選択した値が入っている
+	// 拡張for文を使用して、変数productから
+	// 選択したものを取り出し、
+	// 対応する商品の金額をsumAmountに加算
+	// また、選択した商品名をresultにくっつけて、文字列を作成
+	// (商品名の区切り(後ろ)には<br>をつける)
+	// (例:「テレビ」と「冷蔵庫」を選択した場合、sumAmountの値は「50000」
+	//      resultの値は「テレビ<br>冷蔵庫<br>」になる
 
-        // 購入後の所持金をセッションに保存
+	// 現在の所持金と購入金額の合計を比較して、
+	// 所持金が足りているか判断
 
-    }
+	// 足りている場合は、購入後の所持金を計算し、
+	// 変数:newMoneyにセット
+
+	// 購入後の所持金をセッションに保存
+
+}
 %>
 
 <!DOCTYPE html>

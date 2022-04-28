@@ -1,22 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-    /*
-       下記コメントを参考に、必要な処理を記述してください
-    */
+/*
+   下記コメントを参考に、必要な処理を記述してください
+*/
+String btn = request.getParameter("btn");
+// セッション初期化
+// (セッションに所持金がない、もしくは、リセットボタンを押した際は
+//  所持金の初期値をセッションに保存する)
 
-    // セッション初期化
-    // (セッションに所持金がない、もしくは、リセットボタンを押した際は
-    //  所持金の初期値をセッションに保存する)
-
-    // 所持金をセッションから取得
+// 所持金をセッションから取得
 //現在は仮で値をセットしている。実際はセッションから取得する
-    
-    if (session.getAttribute("money") == null) {
-        session.setAttribute("money", 50000);
-    }
-    
-int money = (int)session.getAttribute("money");
+
+if (session.getAttribute("money") == null) {
+	session.setAttribute("money", 50000);
+}
+
+if (btn != null && btn.equals("reset")) {
+
+	session.setAttribute("money", 50000);
+
+}
+int money = (int) session.getAttribute("money");
 %>
 <!DOCTYPE html>
 <html>
